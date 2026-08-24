@@ -1,5 +1,3 @@
-import random
-import re
 
 class veiculo():
     def __init__(self, placa, modelo, marca, ano_fabricao, cor, tanque):
