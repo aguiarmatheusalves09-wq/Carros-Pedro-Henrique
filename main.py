@@ -25,12 +25,12 @@ while True:
             print("Aluguel realizado com sucesso!")
 
         case 2:
-            aluguel.cancelar_aluguel(input("CPF: ")) 
+            aluguel.cancelar_aluguel(input("ID: ")) 
             os.system('cls')
             print("Aluguel cancelado!")
 
         case 3:
-            novo_contato = Contato(input("Nome do cliente: "), input("CPF do cliente: "), input("Telefone: "))
+            novo_contato = Cliente(input("Nome do cliente: "), input("CPF do cliente: "), input("Telefone: "))
             os.system('cls')
             print("Cliente cadastrado com sucesso!")
 
