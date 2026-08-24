@@ -1,21 +1,26 @@
 from datetime import date
 import datetime
 from cliente import *
+from Veiculos import *
 
-class aluguel(cliente):
-    def __init__(self, data_devolucao:date, valor):
-        self.__data_retirada = datetime
+class aluguel():
+    def __init__(self, data_devolucao:date):
+        self.__data_retirada = date.today
         self.__data_devolucao = data_devolucao
-        self.__valor = valor
+        self.__valor = float
+        self.__aluguel = []
 
-    def registrar_aluguel(self, cpf):
-        cliente_encontrado = cliente.buscar_por_cpf(cpf)
-        if cliente_encontrado is None:
-            return False
-        cliente_encontrado.adicionar_aluguel(self)
-        return True
-
-    def registrar_veiculo(self, cpf):
-        return self.registrar_aluguel(cpf)
-
+    def gerar_valor(self, tipo):
+        diferenca = self.__data_devolucao - self.__data_retirada
+        if tipo == "comun" or "COMUN":
+            return self.__valor == diferenca * 250
+        elif tipo == "Eco" or "eco":
+            return self.__valor == diferenca * 500
+        else:
+            return self.__valor == diferenca * 800
     
+    def registrar_aluguel(self, devolucao, valor):
+        return self.__aluguel.append(self.__data_retirada, self.__data_devolucao, self.__valor)
+
+    def cancelar_aluguel(self):
+        

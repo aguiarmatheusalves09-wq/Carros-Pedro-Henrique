@@ -1,3 +1,5 @@
+from aluguel import aluguel
+
 class cliente():
     def __init__(self, nome, cpf):
         self.__nome = nome
@@ -15,9 +17,12 @@ class cliente():
     def remover(self, nome):
         for i in enumerate(self.__clientes):
             if self.__clientes == nome:
-                self.__tarefas_pendentes.pop(i)
+                self.__clientes.pop(i)
                 return True
-
+    
+    def juntar_aluguel(self):
+        return self.__clientes.append()
+    
 class contato():
     def __init__(self, tipo, contato):
         self.__tipo = tipo
