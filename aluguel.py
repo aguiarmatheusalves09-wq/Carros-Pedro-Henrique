@@ -31,4 +31,9 @@ class aluguel():
                 self.__aluguel.pop(i)
                 return True
 
+class Seguro():
+    def __init__(self, valor_seguro, tipo_seguro):
+        self.__valor_seguro = valor_seguro
+        self.__tipo_seguro = tipo_seguro
+
     
