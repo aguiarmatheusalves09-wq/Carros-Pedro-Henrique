@@ -8,7 +8,7 @@ class aluguel():
         self.__data_retirada = date.today
         self.__data_devolucao = data_devolucao
         self.__valor = float
-        self.__aluguel = []
+        self.__alugueis = []
 
     def gerar_valor(self, tipo):
         diferenca = self.__data_devolucao - self.__data_retirada
@@ -20,7 +20,7 @@ class aluguel():
             return self.__valor == diferenca * 800
     
     def registrar_aluguel(self, devolucao, valor):
-        return self.__aluguel.append(self.__data_retirada, self.__data_devolucao, self.__valor)
+        return self.__alugueis.append(self.__data_retirada, self.__data_devolucao, self.__valor)
 
     def cancelar_aluguel(self):
         
