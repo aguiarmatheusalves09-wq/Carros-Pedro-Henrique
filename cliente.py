@@ -20,8 +20,7 @@ class cliente():
                 self.__clientes.pop(i)
                 return True
     
-    def juntar_aluguel(self):
-        return self.__clientes.append()
+
     
 class contato():
     def __init__(self, tipo, contato):
