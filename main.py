@@ -68,17 +68,7 @@ while True:
                             input("Data de devolução (DD/MM/AAAA): ").strip(), "%d/%m/%Y"
                         ).date(),
                         valor=float(input("Valor: ")),
-                        placa=input("Placa: ").strip(),
-                        modelo=input("Modelo: ").strip(),
-                        marca=input("Marca: ").strip(),
-                        ano_fabricao=input("Ano de fabricação: ").strip(),
-                        cor=input("Cor: ").strip(),
-                        tipo=input("Tipo da moto: ").strip(),
-                        tipo_veiculo="Moto",
-                        cilindrada=input("Tipo de cilindrada: ").strip(),
-                        tipo_partida=input("Tipo de partida: ").strip(),
-                        categoria=input("Categoria da moto: ").strip()
-                    )
+                        tipo_veiculo=tipo_veiculo)
                 elif tipo_veiculo == "carro":
                     novo_aluguel = Aluguel(
                         id=input("ID do aluguel: ").strip(),
@@ -86,13 +76,6 @@ while True:
                             input("Data de devolução (DD/MM/AAAA): ").strip(), "%d/%m/%Y"
                         ).date(),
                         valor=float(input("Valor: ")),
-                        placa=input("Placa: ").strip(),
-                        modelo=input("Modelo: ").strip(),
-                        marca=input("Marca: ").strip(),
-                        ano_fabricao=input("Ano de fabricação: ").strip(),
-                        cor=input("Cor: ").strip(),
-                        tipo=input("Tipo de carro: ").strip(),
-                        tipo_veiculo="Carro"
                     )
                 else:
                     limpar_tela()

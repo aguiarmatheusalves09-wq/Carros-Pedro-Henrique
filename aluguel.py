@@ -1,4 +1,5 @@
 from datetime import date
+from Veiculos import Carro, Moto
 
 class Seguro:
     def __init__(self, tipo_seguro, valor_seguro):
@@ -16,43 +17,19 @@ class Seguro:
 
 
 class Aluguel:
-    def __init__(
-        self,
-        id,
-        data_devolucao: date,
-        valor: float,
-        placa,
-        modelo,
-        marca,
-        ano_fabricao,
-        cor,
-        tipo,
-        tipo_veiculo,
-        cilindrada=None,
-        tipo_partida=None,
-        categoria=None,
-    ):
+    def __init__(self, id, data_devolucao: date, valor: float, tipo_veiculo):
         self.__id = str(id).strip()
         self.__data_retirada = date.today()
         self.__data_devolucao = data_devolucao
-
         self.__valor = float(valor)
-        self.__placa = str(placa).strip()
-        self.__modelo = str(modelo).strip()
-        self.__marca = str(marca).strip()
-        self.__ano_fabricacao = str(ano_fabricao).strip()
-        self.__cor = str(cor).strip()
-        self.__tipo = str(tipo).strip()
-
-        self.__tipo_veiculo = str(tipo_veiculo).strip().capitalize()
+        self.__tipo_veiculo = str(tipo_veiculo).strip()
         self.__seguro = []  
 
-        if self.__tipo_veiculo == "Moto":
-            if cilindrada is None or str(cilindrada).strip() == "":
-                raise ValueError("Moto requer cilindrada.")
-            self.__cilindrada = str(cilindrada).strip()
-            self.__tipo_partida = str(tipo_partida).strip() if tipo_partida else ""
-            self.__categoria = str(categoria).strip() if categoria else ""
+        if self.__tipo_veiculo == "moto":
+            return Moto(placa=input("Placa: "), modelo=input("Modelo: "), marca=input("Marca: "), categoria=("Categoria: "))
+        
+        elif self.__tipo_veiculo == "carro":
+            return Moto(placa=input("Placa: "), modelo=input("Modelo: "), marca=input("Marca: "), quant_portas=("Quantidade de portas: "))
 
     def get_id(self):
         return self.__id
