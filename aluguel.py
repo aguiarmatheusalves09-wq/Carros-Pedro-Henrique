@@ -12,11 +12,6 @@ class Aluguel():
         self.__data_retirada = date.today
         self.__data_devolucao = data_devolucao
         self.__valor = float
-        if tipo_veiculo == "moto":
-            self.__veiculos = veiculo()
-        elif tipo_veiculo == "carro":
-            self.__veiculos = veiculo
-        self.__aluguel = []
 
     def gerar_valor(self):
         diferenca = self.__data_devolucao - self.__data_retirada
