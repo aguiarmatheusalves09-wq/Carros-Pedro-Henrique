@@ -7,11 +7,12 @@ class Aluguel():
         self.__id = id
         self.__data_retirada = date.today()
         self.__data_devolucao = data_devolucao
+
         self.__valor = float(valor)
         self.__placa = placa
         self.__modelo = modelo
         self.__marca = marca
-        self.__ano_fabricacao = ano_fabricao
+        self.__ano_fabricacao = ano_fabricao    
         self.__cor = cor
         self.__tanque = tanque
         self.__tipo = tipo
@@ -20,7 +21,7 @@ class Aluguel():
 
         if tipo_veiculo == "Moto":
             if cilindrada is None:
-                    raise ValueError("Moto requer cilindrada.")
+                raise ValueError("Moto requer cilindrada.")
             self.__cilindrada = cilindrada
             self.__tipo_partida = tipo_partida
             self.__categoria = categoria
@@ -30,6 +31,8 @@ class Aluguel():
             return f"ID: {self.__id}, Data de retirada: {self.__data_retirada}, Data de devolução: {self.__data_devolucao}, Valor: {self.__valor}, Placa: {self.__placa}, Modelo: {self.__modelo}, Marca:{self.__marca}, Ano de fabricação: {self.__ano_fabricacao}, Cor: {self.__cor}, Capacidade do tanque: {self.__tanque}, Tipo de carro{self.__tipo}"
         elif self.__tipo_veiculo == "Moto":
             return f"ID: {self.__id}, Data de retirada: {self.__data_retirada}, Data de devolução: {self.__data_devolucao}, Valor: {self.__valor}, Placa: {self.__placa}, Modelo: {self.__modelo}, Marca:{self.__marca}, Ano de fabricação: {self.__ano_fabricacao}, Cor: {self.__cor}, Capacidade do tanque: {self.__tanque}, Tipo de carro{self.__tipo}, Cilindradas: {self.__cilindrada}, Tipo de partida: {self.__tipo_partida}, Categoria: {self.__categoria}"
+        self.__valor = float
+
 
     def gerar_valor(self):
         tipo = self.__tipo.lower()

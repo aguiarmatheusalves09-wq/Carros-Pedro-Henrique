@@ -11,9 +11,11 @@ class Veiculo():
         self._lista = []
 
     def __str__(self):
+
         return (f'Modelo: {self._modelo}\nTipo: {self._tipo}\nMarca: {self._marca}\n'
             f'Placa: {self._placa}\nAno: {self._ano_fabricao}\nCor: {self._cor}\n'
             f'Tanque: {self._tanque}\nAlugado: {self._alugado}')
+
 
     def cadastrar_veiculo(self, placa, modelo, marca, ano_fabricao, cor, tanque, *dados):
         self._lista.append((placa, modelo, marca, ano_fabricao, cor, tanque, *dados))
@@ -53,5 +55,37 @@ class Moto(Veiculo):
                 f'{self._cilindrada}\nTipo de partida: {self._tipo_partida}\n'
                 f'Categoria: {self._categoria}')
 
-    def cadastrar_veiculo(self, placa, modelo, marca, ano_fabricao, cor, tanque, *dados):
-        self._lista.append((placa, modelo, marca, ano_fabricao, cor, tanque, *dados))
+ #   def cadastrar_veiculo(self, placa, modelo, marca, ano_fabricao, cor, tanque, *dados):
+#        self._lista.append((placa, modelo, marca, ano_fabricao, cor, tanque, *dados))
+ #       self.__versao = versao
+ #       self.__tp_combustivel = tp_combustivel
+  #      self.__quant_portas = quant_portas
+  #      self.__carros = []
+
+    def __str__(self):
+        return f'Modelo: {self.__modelo} /nTipo: {self.__tipo} /nVersão: {self.__versao} /nMarca: {self.__marca} /nPlaca: {self.__placa} /nAno: {self.__ano_fabricao} /nCor: {self.__cor} /nTanque: {self.__tanque} /nTipo de Combustivel: {self.__tp_combustivel} /nQuantidade de Portas: {self.__quant_portas} /nAlugado: {self.__alugado}'
+
+    def cadastrar_veiculo(self, placa, modelo, marca, ano_fabricao, cor, tanque, versao, tp_combustivel, tipo_carro, quant_portas):
+        return self.__carros.append(placa, modelo, marca, ano_fabricao, cor, tanque, versao, tp_combustivel, tipo_carro, quant_portas)
+
+    def lista(self):
+        return self.__lista.append(self.__carros)
+    
+class moto(veiculo):
+    def __init__(self, placa, modelo, marca, ano_fabricao, cor, tanque, tipo, cilindrada, tipo_partida, categoria):
+        super().__init__(placa, modelo, marca, ano_fabricao, cor, tanque, tipo)
+        self.__tipo_partida = tipo_partida
+        self.__cilindrada = cilindrada
+        self.__categoria = categoria
+        self.__moto = []
+
+
+    def __str__(self):
+            return f'Modelo: {self.__modelo} /nMarca: {self.__marca} /nPlaca: {self.__placa} /nAno: {self.__ano_fabricao} /nCor: {self.__cor} /nTanque: {self.__tanque} /nAlugado: {self.__alugado} /nCilindrada: {self.__cilindrada} /nTipo de partida: {self.__tipo_partida} /nCategoria: {self.__categoria}'
+
+    def cadastrar_veiculo(self, placa, modelo, marca, ano_fabricao, cor, tanque, tipo, cilindrada, tipo_partida, categoria):
+        return self.__moto.append(placa, modelo, marca, ano_fabricao, cor, tanque, tipo, cilindrada, tipo_partida, categoria)
+
+    def lista(self):
+            return self.__lista.append(self.__moto)
+
