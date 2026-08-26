@@ -57,8 +57,15 @@ class Aluguel():
         
 
 class Seguro():
-    def __init__(self, valor_seguro, tipo_seguro):
-        self.__valor_seguro = valor_seguro
+    def __init__(self, tipo_seguro):
+        self.__valor_seguro = 0
         self.__tipo_seguro = tipo_seguro
 
-    
+def valor_seguro(self):
+    if self.__tipo_seguro == "basico":
+        return self.__valor_seguro + 200
+    elif self.__tipo_seguro == "Premiun":
+        return self.__valor_seguro + 500
+    else:
+        return self.__valor_seguro + 1000
+

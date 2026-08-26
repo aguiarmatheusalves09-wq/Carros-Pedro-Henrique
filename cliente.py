@@ -1,6 +1,7 @@
 from aluguel import Aluguel
 from datetime import date
 
+
 class Cliente():
     def __init__(self, nome, cpf, tipo, contato):
         self.__nome = nome
