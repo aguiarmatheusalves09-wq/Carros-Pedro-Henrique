@@ -1,4 +1,5 @@
 from aluguel import Aluguel
+from datetime import *
 
 class cliente():
     def __init__(self, nome, cpf, id, data_devolucao:date):
