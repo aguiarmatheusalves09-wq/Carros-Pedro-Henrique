@@ -1,23 +1,22 @@
 from datetime import date
 import datetime
-from atacadao.atacadao import Veiculos
 from cliente import *
 from Veiculos import *
 
 class aluguel():
-    def __init__(self, id, data_devolucao:date):
+    def __init__(self, id, data_devolucao:date, tipo):
         self.__id = id
         self.__data_retirada = date.today
+        self.__tipo = tipo
         self.__data_devolucao = data_devolucao
         self.__valor = float
         self.__aluguel = []
 
     def gerar_valor(self):
-        tipo = Veiculos()
         diferenca = self.__data_devolucao - self.__data_retirada
-        if tipo == "comun" or "COMUN":
+        if self.__tipo == "comun" or "COMUN":
             return self.__valor == diferenca * 250
-        elif tipo == "Eco" or "eco":
+        elif self.__tipo == "Eco" or "eco":
             return self.__valor == diferenca * 500
         else:
             return self.__valor == diferenca * 800
@@ -36,4 +35,5 @@ class Seguro():
         self.__valor_seguro = valor_seguro
         self.__tipo_seguro = tipo_seguro
 
-    
+    def valor_seguro(self):
+        
