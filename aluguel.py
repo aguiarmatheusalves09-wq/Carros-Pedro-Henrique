@@ -3,13 +3,20 @@ import datetime
 from cliente import *
 from Veiculos import *
 
-class aluguel():
-    def __init__(self, id, data_devolucao:date, tipo):
+class Aluguel():
+    def __init__(self, id, data_devolucao:date, tipo_veiculo):
+        self.__id = id
+        self.__data_retirada = date.today
+        self.__tipo = tipo_veiculo
         self.__id = id
         self.__data_retirada = date.today
         self.__tipo = tipo
         self.__data_devolucao = data_devolucao
         self.__valor = float
+        if tipo_veiculo == "moto":
+            self.__veiculos = veiculo()
+        elif tipo_veiculo == "carro":
+            self.__veiculos = veiculo
         self.__aluguel = []
 
     def gerar_valor(self):

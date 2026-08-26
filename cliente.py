@@ -1,10 +1,11 @@
-from aluguel import aluguel
+from aluguel import Aluguel
 
 class cliente():
-    def __init__(self, nome, cpf):
+    def __init__(self, nome, cpf, id, data_devolucao:date):
         self.__nome = nome
         self.__cpf = cpf
         self.__clientes = []
+        self.__aluguel = Aluguel(id, data_devolucao)
 
     def cadastrar(self, nome, cpf):
         return self.__clientes.append(nome, cpf)
