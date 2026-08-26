@@ -10,7 +10,7 @@ def limpar_tela():
 
 def buscar_cliente(cpf):
     for cliente in clientes:
-        if cliente.cpf == cpf:
+        if cliente.get_cpf().strip() == cpf.strip():
             return cliente
     return None
 
@@ -53,7 +53,7 @@ while True:
                 limpar_tela()
                 print("Cliente não encontrado! Cadastre o cliente primeiro.")
             else:
-                tipo_veiculo = input("Qual o tipo de veículo (Moto/Carro): ").strip().capitalize()
+                tipo_veiculo = input("Qual o tipo de veículo (Moto/Carro): ")
                 novo_aluguel = None
 
                 if tipo_veiculo == "Moto":
@@ -98,7 +98,7 @@ while True:
                 if novo_aluguel:
                     cliente.adicionar_aluguel(novo_aluguel)
                     limpar_tela()
-                    print(f"Aluguel vinculado com sucesso ao cliente {cliente.nome}!")
+                    print(f"Aluguel vinculado com sucesso ao cliente {cliente.get_nome()}!")
 
         case 3:
             cpf = input("Informe o CPF do cliente: ")
@@ -165,11 +165,11 @@ while True:
 
             limpar_tela()
             if cliente:
-                if not cliente.alugueis:
-                    print(f"O cliente {cliente.nome} não possui aluguéis registrados.")
+                if not cliente.get_alugueis():
+                    print(f"O cliente {cliente.get_nome()} não possui aluguéis registrados.")
                 else:
-                    print(f"--- ALUGUÉIS DO CLIENTE: {cliente.nome} ---")
-                    for aluguel in cliente.alugueis:
+                    print(f"--- ALUGUÉIS DO CLIENTE: {cliente.get_nome()} ---")
+                    for aluguel in cliente.get_alugueis():
                         print(aluguel)
             else:
                 print("Cliente não encontrado!")
