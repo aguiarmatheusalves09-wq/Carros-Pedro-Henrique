@@ -10,7 +10,6 @@ class Aluguel():
         self.__tipo = tipo_veiculo
         self.__id = id
         self.__data_retirada = date.today
-        self.__tipo = tipo
         self.__data_devolucao = data_devolucao
         self.__valor = float
         if tipo_veiculo == "moto":
