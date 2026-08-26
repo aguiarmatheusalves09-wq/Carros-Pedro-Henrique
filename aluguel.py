@@ -1,15 +1,14 @@
 from datetime import date
-import datetime
 
 class Seguro:
     def __init__(self, tipo_seguro, valor_seguro):
-        self.__tipo_seguro = tipo_seguro
+        self.__tipo_seguro = str(tipo_seguro).strip()
         self.__valor_seguro = float(valor_seguro)
 
-    def tipo_seguro(self):
+    def get_tipo_seguro(self):
         return self.__tipo_seguro
 
-    def valor_seguro(self):
+    def get_valor_seguro(self):
         return self.__valor_seguro
 
     def __str__(self):
@@ -27,34 +26,33 @@ class Aluguel:
         marca,
         ano_fabricao,
         cor,
-        tanque,
         tipo,
         tipo_veiculo,
         cilindrada=None,
         tipo_partida=None,
         categoria=None,
     ):
-        self.__id = id
+        self.__id = str(id).strip()
         self.__data_retirada = date.today()
         self.__data_devolucao = data_devolucao
 
         self.__valor = float(valor)
-        self.__placa = placa
-        self.__modelo = modelo
-        self.__marca = marca
-        self.__ano_fabricacao = ano_fabricao
-        self.__cor = cor
-        self.__tanque = tanque
-        self.__tipo = tipo
-        self.__tipo_veiculo = tipo_veiculo
+        self.__placa = str(placa).strip()
+        self.__modelo = str(modelo).strip()
+        self.__marca = str(marca).strip()
+        self.__ano_fabricacao = str(ano_fabricao).strip()
+        self.__cor = str(cor).strip()
+        self.__tipo = str(tipo).strip()
+
+        self.__tipo_veiculo = str(tipo_veiculo).strip().capitalize()
         self.__seguro = []  
 
-        if tipo_veiculo == "Moto":
-            if cilindrada is None:
+        if self.__tipo_veiculo == "Moto":
+            if cilindrada is None or str(cilindrada).strip() == "":
                 raise ValueError("Moto requer cilindrada.")
-            self.__cilindrada = cilindrada
-            self.__tipo_partida = tipo_partida
-            self.__categoria = categoria
+            self.__cilindrada = str(cilindrada).strip()
+            self.__tipo_partida = str(tipo_partida).strip() if tipo_partida else ""
+            self.__categoria = str(categoria).strip() if categoria else ""
 
     def get_id(self):
         return self.__id
@@ -72,12 +70,15 @@ class Aluguel:
     def gerar_valor(self):
         tipo = self.__tipo.lower()
         diferenca = (self.__data_devolucao - self.__data_retirada).days
+        
+        dias = max(diferenca, 1)
+
         if tipo in ("comum", "standard"):
-            self.__valor = diferenca * 250
+            self.__valor = dias * 250.0
         elif tipo == "eco":
-            self.__valor = diferenca * 500
+            self.__valor = dias * 500.0
         else:
-            self.__valor = diferenca * 800
+            self.__valor = dias * 800.0
         return self.__valor
 
     def __str__(self):
@@ -92,7 +93,7 @@ class Aluguel:
             f"Valor: R$ {self.__valor:.2f} | Placa: {self.__placa} | "
             f"Modelo: {self.__modelo} | Marca: {self.__marca} | "
             f"Ano: {self.__ano_fabricacao} | Cor: {self.__cor} | "
-            f"Tanque: {self.__tanque} | Categoria/Tipo: {self.__tipo}"
+            f"Categoria/Tipo: {self.__tipo}"
         )
 
         if self.__tipo_veiculo == "Moto":

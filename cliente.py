@@ -25,7 +25,7 @@ class Cliente:
 
     def buscar_aluguel_por_id(self, id_aluguel):
         for aluguel in self.__alugueis:
-            if str(aluguel.id) == str(id_aluguel):
+            if str(aluguel.get_id()) == str(id_aluguel):
                 return aluguel
         return None
 

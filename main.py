@@ -26,69 +26,72 @@ while True:
     print("(7) Listar todos os clientes cadastrados")
     print("(8) Sair")
 
-    opcao = int(input("Escolha uma opção: "))
+    try:
+        opcao = int(input("Escolha uma opção: "))
+    except ValueError:
+        limpar_tela()
+        print("Por favor, digite um número válido!")
+        continue
 
     match opcao:
         case 1:
-            cpf = input("CPF do cliente: ")
+            cpf = input("CPF do cliente: ").strip()
             if buscar_cliente(cpf):
                 limpar_tela()
                 print("Já existe um cliente cadastrado com este CPF!")
             else:
                 novo_cliente = Cliente(
-                    nome=input("Nome do cliente: "),
+                    nome=input("Nome do cliente: ").strip(),
                     cpf=cpf,
-                    tipo=input("Tipo de contato (email/telefone): "),
-                    contato=input("Contato: ")
+                    tipo=input("Tipo de contato (email/telefone): ").strip(),
+                    contato=input("Contato: ").strip()
                 )
                 clientes.append(novo_cliente)
                 limpar_tela()
                 print("Cliente cadastrado com sucesso!")
 
         case 2:
-            cpf = input("Informe o CPF do cliente: ")
+            cpf = input("Informe o CPF do cliente: ").strip()
             cliente = buscar_cliente(cpf)
 
             if not cliente:
                 limpar_tela()
                 print("Cliente não encontrado! Cadastre o cliente primeiro.")
             else:
-                tipo_veiculo = input("Qual o tipo de veículo (Moto/Carro): ")
+                tipo_veiculo = input("Qual o tipo de veículo (Moto/Carro): ").strip().lower()
                 novo_aluguel = None
 
-                if tipo_veiculo == "Moto":
+                if tipo_veiculo == "moto":
                     novo_aluguel = Aluguel(
-                        id=input("ID do aluguel: "),
+                        id=input("ID do aluguel: ").strip(),
                         data_devolucao=datetime.strptime(
-                            input("Data de devolução (DD/MM/AAAA): "), "%d/%m/%Y"
+                            input("Data de devolução (DD/MM/AAAA): ").strip(), "%d/%m/%Y"
                         ).date(),
                         valor=float(input("Valor: ")),
-                        placa=input("Placa: "),
-                        modelo=input("Modelo: "),
-                        marca=input("Marca: "),
-                        ano_fabricao=input("Ano de fabricação: "),
-                        cor=input("Cor: "),
-                        tanque=input("Tanque: "),
-                        tipo=input("Tipo da moto: "),
+                        placa=input("Placa: ").strip(),
+                        modelo=input("Modelo: ").strip(),
+                        marca=input("Marca: ").strip(),
+                        ano_fabricao=input("Ano de fabricação: ").strip(),
+                        cor=input("Cor: ").strip(),
+                        tipo=input("Tipo da moto: ").strip(),
                         tipo_veiculo="Moto",
-                        cilindrada=input("Tipo de cilindrada: "),
-                        tipo_partida=input("Tipo de partida: "),
-                        categoria=input("Categoria da moto: ")
+                        cilindrada=input("Tipo de cilindrada: ").strip(),
+                        tipo_partida=input("Tipo de partida: ").strip(),
+                        categoria=input("Categoria da moto: ").strip()
                     )
-                elif tipo_veiculo == "Carro":
+                elif tipo_veiculo == "carro":
                     novo_aluguel = Aluguel(
-                        id=input("ID do aluguel: "),
+                        id=input("ID do aluguel: ").strip(),
                         data_devolucao=datetime.strptime(
-                            input("Data de devolução (DD/MM/AAAA): "), "%d/%m/%Y"
+                            input("Data de devolução (DD/MM/AAAA): ").strip(), "%d/%m/%Y"
                         ).date(),
                         valor=float(input("Valor: ")),
-                        placa=input("Placa: "),
-                        modelo=input("Modelo: "),
-                        marca=input("Marca: "),
-                        ano_fabricao=input("Ano de fabricação: "),
-                        cor=input("Cor: "),
-                        tanque=input("Tanque: "),
-                        tipo=input("Tipo de carro: "),
+                        placa=input("Placa: ").strip(),
+                        modelo=input("Modelo: ").strip(),
+                        marca=input("Marca: ").strip(),
+                        ano_fabricao=input("Ano de fabricação: ").strip(),
+                        cor=input("Cor: ").strip(),
+                        tipo=input("Tipo de carro: ").strip(),
                         tipo_veiculo="Carro"
                     )
                 else:
@@ -101,11 +104,11 @@ while True:
                     print(f"Aluguel vinculado com sucesso ao cliente {cliente.get_nome()}!")
 
         case 3:
-            cpf = input("Informe o CPF do cliente: ")
+            cpf = input("Informe o CPF do cliente: ").strip()
             cliente = buscar_cliente(cpf)
 
             if cliente:
-                id_busca = input("Informe o ID do aluguel a cancelar: ")
+                id_busca = input("Informe o ID do aluguel a cancelar: ").strip()
                 if cliente.cancelar_aluguel(id_busca):
                     limpar_tela()
                     print("Aluguel cancelado com sucesso!")
@@ -117,15 +120,15 @@ while True:
                 print("Cliente não encontrado!")
 
         case 4:
-            cpf = input("Informe o CPF do cliente: ")
+            cpf = input("Informe o CPF do cliente: ").strip()
             cliente = buscar_cliente(cpf)
 
             if cliente:
-                id_busca = input("Informe o ID do aluguel: ")
+                id_busca = input("Informe o ID do aluguel: ").strip()
                 aluguel = cliente.buscar_aluguel_por_id(id_busca)
 
                 if aluguel:
-                    tipo_seguro = input("Qual tipo de seguro deseja: ")
+                    tipo_seguro = input("Qual tipo de seguro deseja: ").strip()
                     valor_seguro = float(input("Qual o valor do seguro: "))
                     aluguel.adicionar_seguro(tipo_seguro, valor_seguro)
                     limpar_tela()
@@ -138,11 +141,11 @@ while True:
                 print("Cliente não encontrado!")
 
         case 5:
-            cpf = input("Informe o CPF do cliente: ")
+            cpf = input("Informe o CPF do cliente: ").strip()
             cliente = buscar_cliente(cpf)
 
             if cliente:
-                id_busca = input("Informe o ID do aluguel: ")
+                id_busca = input("Informe o ID do aluguel: ").strip()
                 aluguel = cliente.buscar_aluguel_por_id(id_busca)
 
                 if aluguel:
@@ -160,7 +163,7 @@ while True:
                 print("Cliente não encontrado!")
 
         case 6:
-            cpf = input("Informe o CPF do cliente: ")
+            cpf = input("Informe o CPF do cliente: ").strip()
             cliente = buscar_cliente(cpf)
 
             limpar_tela()
