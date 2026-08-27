@@ -11,7 +11,7 @@ class Cliente:
         self.__aluguel = None
 
     def __str__(self):
-        return f"Nome: {self.__nome} | CPF: {self.__cpf} | {self.__contato}"
+        return f"Nome: {self.__nome} | CPF: {self.__cpf} | {self.__contato} | Aluguel: {self.__aluguel}"
     
     def get_cpf(self):
         return self.__cpf
