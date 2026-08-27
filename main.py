@@ -3,6 +3,8 @@ import os
 from datetime import datetime
 
 clientes = []
+carros = []
+motos =[]
 
 def limpar_tela():
     os.system('cls')
@@ -23,7 +25,8 @@ while True:
     print("(5) Cancelar seguro")
     print("(6) Listar aluguéis de um cliente")
     print("(7) Listar todos os clientes cadastrados")
-    print("(8) Sair")
+    print("(8) Exibir veículos disponíveis")
+    print("(9) Sair")
 
     try:
         opcao = int(input("Escolha uma opção: "))
@@ -147,8 +150,11 @@ while True:
                 print("--- LISTA DE CLIENTES ---")
                 for cliente in clientes:
                     print(cliente)
-        
+
         case 8:
+            print("Seção de Motos")
+
+        case 9:
             print("Saindo do sistema...")
             break
 
