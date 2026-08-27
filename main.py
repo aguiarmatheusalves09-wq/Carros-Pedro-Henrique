@@ -1,4 +1,3 @@
-from aluguel import Aluguel
 from cliente import Cliente
 import os 
 from datetime import datetime
@@ -61,38 +60,21 @@ while True:
                 tipo_veiculo = input("Qual o tipo de veículo (Moto/Carro): ").strip().lower()
                 novo_aluguel = None
 
-                if tipo_veiculo == "moto":
-                    novo_aluguel = Aluguel(
-                        id=input("ID do aluguel: ").strip(),
-                        data_devolucao=datetime.strptime(
-                            input("Data de devolução (DD/MM/AAAA): ").strip(), "%d/%m/%Y"
-                        ).date(),
-                        valor=float(input("Valor: ")),
-                        tipo_veiculo=tipo_veiculo)
-                elif tipo_veiculo == "carro":
-                    novo_aluguel = Aluguel(
-                        id=input("ID do aluguel: ").strip(),
-                        data_devolucao=datetime.strptime(
-                            input("Data de devolução (DD/MM/AAAA): ").strip(), "%d/%m/%Y"
-                        ).date(),
-                        valor=float(input("Valor: ")),
-                    )
+                if tipo_veiculo == "moto" or tipo_veiculo == "carro":
+                    cliente.adicionar_aluguel(id=input("ID do aluguel: ").strip(), data_devolucao=datetime.strptime(input("Data de devolução (DD/MM/AAAA): ").strip(), "%d/%m/%Y").date(), tipo_veiculo=tipo_veiculo)
+                    limpar_tela()
+                    print(f"Aluguel vinculado com sucesso ao cliente {cliente.get_nome()}!")
                 else:
                     limpar_tela()
                     print("Veículo inválido! Escolha Moto ou Carro.")
-
-                if novo_aluguel:
-                    cliente.adicionar_aluguel(novo_aluguel)
-                    limpar_tela()
-                    print(f"Aluguel vinculado com sucesso ao cliente {cliente.get_nome()}!")
 
         case 3:
             cpf = input("Informe o CPF do cliente: ").strip()
             cliente = buscar_cliente(cpf)
 
             if cliente:
-                id_busca = input("Informe o ID do aluguel a cancelar: ").strip()
-                if cliente.cancelar_aluguel(id_busca):
+                cancela = cliente.cancelar_aluguel(cliente.get_aluguel.get_id)
+                if cancelado:
                     limpar_tela()
                     print("Aluguel cancelado com sucesso!")
                 else:
@@ -107,8 +89,7 @@ while True:
             cliente = buscar_cliente(cpf)
 
             if cliente:
-                id_busca = input("Informe o ID do aluguel: ").strip()
-                aluguel = cliente.buscar_aluguel_por_id(id_busca)
+                aluguel = cliente.get_aluguel()
 
                 if aluguel:
                     tipo_seguro = input("Qual tipo de seguro deseja: ").strip()
@@ -128,8 +109,7 @@ while True:
             cliente = buscar_cliente(cpf)
 
             if cliente:
-                id_busca = input("Informe o ID do aluguel: ").strip()
-                aluguel = cliente.buscar_aluguel_por_id(id_busca)
+                aluguel = cliente.get_aluguel()
 
                 if aluguel:
                     if aluguel.cancelar_seguro():
@@ -151,12 +131,11 @@ while True:
 
             limpar_tela()
             if cliente:
-                if not cliente.get_alugueis():
+                if not cliente.get_aluguel():
                     print(f"O cliente {cliente.get_nome()} não possui aluguéis registrados.")
                 else:
                     print(f"--- ALUGUÉIS DO CLIENTE: {cliente.get_nome()} ---")
-                    for aluguel in cliente.get_alugueis():
-                        print(aluguel)
+                    print(cliente.get_aluguel())
             else:
                 print("Cliente não encontrado!")
 

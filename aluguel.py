@@ -1,35 +1,23 @@
 from datetime import date
-from Veiculos import Carro, Moto
-
-class Seguro:
-    def __init__(self, tipo_seguro, valor_seguro):
-        self.__tipo_seguro = str(tipo_seguro).strip()
-        self.__valor_seguro = float(valor_seguro)
-
-    def get_tipo_seguro(self):
-        return self.__tipo_seguro
-
-    def get_valor_seguro(self):
-        return self.__valor_seguro
-
-    def __str__(self):
-        return f"Seguro: {self.__tipo_seguro} (R$ {self.__valor_seguro:.2f})"
-
+from carro import Carro
+from moto import Moto
+from seguro import Seguro
 
 class Aluguel:
-    def __init__(self, id, data_devolucao: date, valor: float, tipo_veiculo):
+    def __init__(self, id, data_devolucao: date, tipo_veiculo):
         self.__id = str(id).strip()
         self.__data_retirada = date.today()
         self.__data_devolucao = data_devolucao
-        self.__valor = float(valor)
+        self.__valor = None
         self.__tipo_veiculo = str(tipo_veiculo).strip()
-        self.__seguro = []  
+        self.__veiculo = None
+        self.__seguros = []  
 
         if self.__tipo_veiculo == "moto":
-            return Moto(placa=input("Placa: "), modelo=input("Modelo: "), marca=input("Marca: "), categoria=("Categoria: "))
+            self.__veiculo = Moto(placa=input("Placa: "), modelo=input("Modelo: "), marca=input("Marca: "), categoria=("Categoria: "))
         
         elif self.__tipo_veiculo == "carro":
-            return Moto(placa=input("Placa: "), modelo=input("Modelo: "), marca=input("Marca: "), quant_portas=("Quantidade de portas: "))
+            self.__veiculo = Carro(placa=input("Placa: "), modelo=input("Modelo: "), marca=input("Marca: "), quant_portas=("Quantidade de portas: "))
 
     def get_id(self):
         return self.__id
@@ -45,17 +33,16 @@ class Aluguel:
         return False
 
     def gerar_valor(self):
-        tipo = self.__tipo.lower()
         diferenca = (self.__data_devolucao - self.__data_retirada).days
         
         dias = max(diferenca, 1)
 
-        if tipo in ("comum", "standard"):
-            self.__valor = dias * 250.0
-        elif tipo == "eco":
-            self.__valor = dias * 500.0
-        else:
-            self.__valor = dias * 800.0
+        if self.__tipo_veiculo == "moto":
+            self.__valor = 250 * dias
+
+        elif self.__tipo_veiculo == "carro":
+            self.__valor = 500 * dias
+
         return self.__valor
 
     def __str__(self):
@@ -69,12 +56,13 @@ class Aluguel:
             f"Devolução: {self.__data_devolucao.strftime('%d/%m/%Y')} | "
             f"Valor: R$ {self.__valor:.2f} | Placa: {self.__placa} | "
             f"Modelo: {self.__modelo} | Marca: {self.__marca} | "
-            f"Ano: {self.__ano_fabricacao} | Cor: {self.__cor} | "
-            f"Categoria/Tipo: {self.__tipo}"
         )
 
-        if self.__tipo_veiculo == "Moto":
-            info_base += f" | Cilindradas: {self.__cilindrada} | Partida: {self.__tipo_partida} | Cat. Moto: {self.__categoria}"
+        if self.__tipo_veiculo == "moto":
+            info_base += f" | Categoria: {self.__veiculo.get_categoria} |"
+        
+        elif self.__tipo_veiculo == "carro":
+            info_base += f" | Quantidade de portas: {self.__veiculo.get_quant_portas} |"
 
-        info_base += f" | Seguro: [{texto_seguro}]"
+        info_base += f" | Seguro: [{texto_seguro} |"
         return info_base
