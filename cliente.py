@@ -26,7 +26,7 @@ class Cliente:
         self.__aluguel = Aluguel(id, data_devolucao, tipo_veiculo)
 
     def cancelar_aluguel(self, id_aluguel):
-        if aluguel:
+        if id_aluguel:
             self.__aluguel = None
             return True
         return False

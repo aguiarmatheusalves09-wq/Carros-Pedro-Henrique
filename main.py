@@ -77,7 +77,7 @@ while True:
 
             if cliente:
                 cancela = cliente.cancelar_aluguel(cliente.get_aluguel.get_id)
-                if cancelado:
+                if cancela:
                     limpar_tela()
                     print("Aluguel cancelado com sucesso!")
                 else:

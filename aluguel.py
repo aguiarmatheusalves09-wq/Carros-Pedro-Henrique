@@ -8,8 +8,8 @@ class Aluguel:
         self.__id = str(id).strip()
         self.__data_retirada = date.today()
         self.__data_devolucao = data_devolucao
-        self.__valor = 0.0  # Começa em 0.0 para evitar erros de formato
-        self.__tipo_veiculo = str(tipo_veiculo).strip().lower() # Garante minúsculo
+        self.__valor = 0.0  
+        self.__tipo_veiculo = str(tipo_veiculo).strip().lower() 
         self.__veiculo = None
         self.__seguros = []  
 
@@ -18,8 +18,6 @@ class Aluguel:
         
         elif self.__tipo_veiculo == "carro":
             self.__veiculo = Carro(placa=input("Placa: "), modelo=input("Modelo: "), marca=input("Marca: "), quant_portas=input("Quantidade de portas: "))
-
-        # Chama automaticamente para o valor nunca ser None
         self.gerar_valor()
 
     def get_id(self):
@@ -51,7 +49,6 @@ class Aluguel:
         if self.__seguros:
             texto_seguro = ", ".join([str(s) for s in self.__seguros])
 
-        # ATENÇÃO: Pegando os dados de dentro de self.__veiculo usando os métodos get dele
         info_base = (
             f"ID: {self.__id} | Tipo: {self.__tipo_veiculo} | "
             f"Retirada: {self.__data_retirada.strftime('%d/%m/%Y')} | "
@@ -60,7 +57,6 @@ class Aluguel:
             f"Modelo: {self.__veiculo.get_modelo()} | Marca: {self.__veiculo.get_marca()} | "
         )
 
-        # Adicionado os parênteses () nos métodos get do veículo
         if self.__tipo_veiculo == "moto":
             info_base += f"Categoria: {self.__veiculo.get_categoria()} |"
         
