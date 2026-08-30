@@ -5,14 +5,15 @@ class Moto(Veiculo):
         super().__init__(placa, modelo, marca)
         self.__categoria = categoria
 
-
     def __str__(self):
-        return (f'Modelo: {self.__modelo}\nMarca: {self.__marca}\n'
-            f'Placa: {self.__placa}\nAlugado: {self.__alugado}\nCilindrada: '
-            f'Categoria: {self.__categoria}')
-    
+        return (f'\nModelo: {self._modelo}'
+                f'\nMarca: {self._marca}'
+                f'\nPlaca: {self._placa}'
+                f'\nAlugado: {self._alugado}'
+                f'\nCategoria: {self.__categoria}')
+
     def get_categoria(self):
         return self.__categoria
 
-    def cadastrar_veiculo(self, placa, modelo, marca, categoria):
-        return self.__carros.append(placa, modelo, marca)
+    def cadastrar_veiculo(self, placa, modelo, marca):
+        super().cadastrar_veiculo(placa, modelo, marca)   

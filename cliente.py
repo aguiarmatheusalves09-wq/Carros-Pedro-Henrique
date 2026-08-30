@@ -11,7 +11,7 @@ class Cliente:
         self.__aluguel = None
 
     def __str__(self):
-        return f"Nome: {self.__nome} | CPF: {self.__cpf} | {self.__contato} | Aluguel: {self.__aluguel}"
+        return f"\nNome: {self.__nome} \nCPF: {self.__cpf} \n{self.__contato} \n{self.__aluguel}"
     
     def get_cpf(self):
         return self.__cpf
@@ -22,11 +22,11 @@ class Cliente:
     def get_aluguel(self):
         return self.__aluguel
 
-    def adicionar_aluguel(self, id, data_devolucao, tipo_veiculo):
-        self.__aluguel = Aluguel(id, data_devolucao, tipo_veiculo)
+    def adicionar_aluguel(self, data_devolucao, tipo_veiculo, lista_carros, lista_motos):
+        self.__aluguel = Aluguel(data_devolucao, tipo_veiculo, lista_carros, lista_motos)
 
-    def cancelar_aluguel(self, id_aluguel):
-        if id_aluguel:
+    def cancelar_aluguel(self):
+        if self.__aluguel:
             self.__aluguel = None
             return True
         return False

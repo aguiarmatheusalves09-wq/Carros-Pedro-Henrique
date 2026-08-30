@@ -1,10 +1,30 @@
 from cliente import Cliente
+from carro import Carro
+from moto import Moto
 import os 
 from datetime import datetime
 
 clientes = []
-carros = []
-motos =[]
+carros = [
+    Carro("ABC-1234", "Onix", "Chevrolet", 4),
+    Carro("DEF-5678", "HB20", "Hyundai", 4),
+    Carro("GHI-9012", "Fiat Argo", "Fiat", 4),
+    Carro("JKL-3456", "Corolla", "Toyota", 4),
+    Carro("MNO-7890", "Civic", "Honda", 4),
+    Carro("PQR-2345", "Ka", "Ford", 4),
+    Carro("STU-6789", "T-Cross", "Volkswagen", 4),
+    Carro("VWX-0123", "S10", "Chevrolet", 4),
+]
+motos = [
+    Moto("ABC-1234", "NCR 170", "Honda", "Esportiva"),
+    Moto("DEF-5678", "MT-07", "Yamaha", "Naked"),
+    Moto("GHI-9012", "Scrambler 400", "Benelli", "Scrambler"),
+    Moto("JKL-3456", "FZ 25", "Yamaha", "Esportiva"),
+    Moto("MNO-7890", "XRE 300", "Honda", "Aventura"),
+    Moto("PQR-2345", "CB 300R", "Honda", "Naked"),
+    Moto("STU-6789", "Vulcan 250", "Yamaha", "Cruiser"),
+]
+  
 
 def limpar_tela():
     os.system('cls')
@@ -22,11 +42,11 @@ while True:
     print("(2) Registrar aluguel para cliente")
     print("(3) Cancelar aluguel de cliente")
     print("(4) Contratar seguro") 
-    print("(5) Cancelar seguro")
-    print("(6) Listar aluguéis de um cliente")
-    print("(7) Listar todos os clientes cadastrados")
-    print("(8) Exibir veículos disponíveis")
-    print("(9) Sair")
+    print("(5) Cancelar seguros")
+    print("(6) Listar clientes")
+    print("(7) Exibir veículos disponíveis")
+    print("(8) Sair")
+
 
     try:
         opcao = int(input("Escolha uma opção: "))
@@ -63,10 +83,20 @@ while True:
                 tipo_veiculo = input("Qual o tipo de veículo (Moto/Carro): ").strip().lower()
                 novo_aluguel = None
 
-                if tipo_veiculo == "moto" or tipo_veiculo == "carro":
-                    cliente.adicionar_aluguel(id=input("ID do aluguel: ").strip(), data_devolucao=datetime.strptime(input("Data de devolução (DD/MM/AAAA): ").strip(), "%d/%m/%Y").date(), tipo_veiculo=tipo_veiculo)
+                if tipo_veiculo == "moto":
+                    for moto in motos:
+                        print(moto)
+                    cliente.adicionar_aluguel(datetime.strptime(input("\nData de devolução (DD/MM/AAAA): ").strip(), "%d/%m/%Y").date(), tipo_veiculo, carros, motos)
                     limpar_tela()
                     print(f"Aluguel vinculado com sucesso ao cliente {cliente.get_nome()}!")
+
+                elif tipo_veiculo == "carro":
+                    for carro in carros:
+                        print(carro)
+                    cliente.adicionar_aluguel(datetime.strptime(input("\nData de devolução (DD/MM/AAAA): ").strip(), "%d/%m/%Y").date(), tipo_veiculo, carros, motos)
+                    limpar_tela()
+                    print(f"Aluguel vinculado com sucesso ao cliente {cliente.get_nome()}!")
+
                 else:
                     limpar_tela()
                     print("Veículo inválido! Escolha Moto ou Carro.")
@@ -76,7 +106,7 @@ while True:
             cliente = buscar_cliente(cpf)
 
             if cliente:
-                cancela = cliente.cancelar_aluguel(cliente.get_aluguel.get_id)
+                cancela = cliente.cancelar_aluguel(cliente.get_aluguel)
                 if cancela:
                     limpar_tela()
                     print("Aluguel cancelado com sucesso!")
@@ -129,20 +159,6 @@ while True:
                 print("Cliente não encontrado!")
 
         case 6:
-            cpf = input("Informe o CPF do cliente: ").strip()
-            cliente = buscar_cliente(cpf)
-
-            limpar_tela()
-            if cliente:
-                if not cliente.get_aluguel():
-                    print(f"O cliente {cliente.get_nome()} não possui aluguéis registrados.")
-                else:
-                    print(f"--- ALUGUÉIS DO CLIENTE: {cliente.get_nome()} ---")
-                    print(cliente.get_aluguel())
-            else:
-                print("Cliente não encontrado!")
-
-        case 7:
             limpar_tela()
             if not clientes:
                 print("Nenhum cliente cadastrado.")
@@ -150,11 +166,21 @@ while True:
                 print("--- LISTA DE CLIENTES ---")
                 for cliente in clientes:
                     print(cliente)
+                    print("-" * 30)
+
+        case 7:
+            print("Seção de Carros")
+            print("-" * 30)
+            for carro in carros:
+                print(carro)
+                print("-" * 30)   
+            print("Seção de Motos") 
+            print("-" * 30)
+            for moto in motos:
+                print(moto)
+                print("-" * 30) 
 
         case 8:
-            print("Seção de Motos")
-
-        case 9:
             print("Saindo do sistema...")
             break
 

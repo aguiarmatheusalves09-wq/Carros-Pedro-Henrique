@@ -7,8 +7,8 @@ class Veiculo():
         self._lista = []
 
     def __str__(self):
-        return (f'Modelo: {self._modelo}\nMarca: {self._marca}\n'
-            f'Placa: {self._placa}\nAlugado: {self._alugado}')
+        return (f'\nModelo: {self._modelo} \nMarca: {self._marca}'
+            f'\nPlaca: {self._placa}')
 
     def get_placa(self):
         return self._placa

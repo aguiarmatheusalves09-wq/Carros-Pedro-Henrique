@@ -6,9 +6,9 @@ class Carro(Veiculo):
         self._quant_portas = quant_portas
 
     def __str__(self):
-        return (f'Modelo: {self._modelo}\n'
-            f'Marca: {self._marca}\nPlaca: {self._placa}\nQuantidade de Portas: {self._quant_portas}\n'
-            f'Alugado: {self._alugado}')
+        return (f'\nModelo: {self._modelo}'
+            f'\nMarca: {self._marca}\nPlaca: {self._placa}\nQuantidade de Portas: {self._quant_portas}'
+            f'\nAlugado: {self._alugado}')
 
     def get_quant_portas(self):
         return self._quant_portas

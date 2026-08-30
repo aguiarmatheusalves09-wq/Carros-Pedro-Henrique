@@ -4,24 +4,34 @@ from moto import Moto
 from seguro import Seguro
 
 class Aluguel:
-    def __init__(self, id, data_devolucao: date, tipo_veiculo):
-        self.__id = str(id).strip()
+    def __init__(self, data_devolucao: date, tipo_veiculo, lista_carros, lista_motos):
         self.__data_retirada = date.today()
         self.__data_devolucao = data_devolucao
-        self.__valor = 0.0  
-        self.__tipo_veiculo = str(tipo_veiculo).strip().lower() 
+        self.__valor = 0.0
+        self.__tipo_veiculo = str(tipo_veiculo).strip().lower()
         self.__veiculo = None
-        self.__seguros = []  
+        self.__seguros = []
+
+        placa = input("Placa: ").strip().upper()
 
         if self.__tipo_veiculo == "moto":
-            self.__veiculo = Moto(placa=input("Placa: "), modelo=input("Modelo: "), marca=input("Marca: "), categoria=input("Categoria: "))
-        
+            self.__veiculo = self._buscar(lista_motos, placa)
         elif self.__tipo_veiculo == "carro":
-            self.__veiculo = Carro(placa=input("Placa: "), modelo=input("Modelo: "), marca=input("Marca: "), quant_portas=input("Quantidade de portas: "))
+            self.__veiculo = self._buscar(lista_carros, placa)
+
+        if self.__veiculo is None:
+            raise ValueError(f"Veículo com placa {placa} não encontrado.")
+        if self.__veiculo._alugado:
+            raise ValueError(f"Veículo com placa {placa} já está alugado.")
+
+        self.__veiculo.set_alugado()
         self.gerar_valor()
 
-    def get_id(self):
-        return self.__id
+    def _buscar(self, lista, placa):
+        for v in lista:
+            if v.get_placa().strip().upper() == placa:
+                return v
+        return None
 
     def adicionar_seguro(self, tipo_seguro, valor_seguro):
         novo_seguro = Seguro(tipo_seguro, valor_seguro)
@@ -29,7 +39,7 @@ class Aluguel:
 
     def cancelar_seguro(self):
         if self.__seguros:
-            self.__seguros.clear()  
+            self.__seguros.clear()
             return True
         return False
 
@@ -45,23 +55,10 @@ class Aluguel:
         return self.__valor
 
     def __str__(self):
-        texto_seguro = "Nenhum"
-        if self.__seguros:
-            texto_seguro = ", ".join([str(s) for s in self.__seguros])
-
-        info_base = (
-            f"ID: {self.__id} | Tipo: {self.__tipo_veiculo} | "
-            f"Retirada: {self.__data_retirada.strftime('%d/%m/%Y')} | "
-            f"Devolução: {self.__data_devolucao.strftime('%d/%m/%Y')} | "
-            f"Valor: R$ {self.__valor:.2f} | Placa: {self.__veiculo.get_placa()} | "
-            f"Modelo: {self.__veiculo.get_modelo()} | Marca: {self.__veiculo.get_marca()} | "
-        )
-
-        if self.__tipo_veiculo == "moto":
-            info_base += f"Categoria: {self.__veiculo.get_categoria()} |"
-        
-        elif self.__tipo_veiculo == "carro":
-            info_base += f"Quantidade de portas: {self.__veiculo.get_quant_portas()} |"
-
-        info_base += f" Seguro: [{texto_seguro}] |"
-        return info_base
+        seguros_str = " ".join(str(i) for i in self.__seguros) if self.__seguros else "Sem seguros"
+        return (f"\nTipo: {self.__tipo_veiculo}"
+                f"\nRetirada: {self.__data_retirada.strftime('%d/%m/%Y')}"
+                f"\nDevolução: {self.__data_devolucao.strftime('%d/%m/%Y')}"
+                f"\nValor: R$ {self.__valor:.2f}"
+                f"\n{self.__veiculo} "
+                f"\n{seguros_str}")

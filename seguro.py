@@ -10,4 +10,4 @@ class Seguro:
         return self.__valor_seguro
 
     def __str__(self):
-        return f"Seguro: {self.__tipo_seguro} (R$ {self.__valor_seguro:.2f})"
+        return f"\n - Seguro: {self.__tipo_seguro} \nValor: R$ {self.__valor_seguro:.2f}"
