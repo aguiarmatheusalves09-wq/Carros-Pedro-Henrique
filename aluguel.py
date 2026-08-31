@@ -1,6 +1,4 @@
 from datetime import date
-from carro import Carro
-from moto import Moto
 from seguro import Seguro
 
 class Aluguel:
