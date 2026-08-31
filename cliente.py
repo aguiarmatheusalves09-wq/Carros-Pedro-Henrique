@@ -1,4 +1,3 @@
-from datetime import date
 from aluguel import Aluguel
 from contato import Contato
 
