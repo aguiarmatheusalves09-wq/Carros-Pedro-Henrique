@@ -12,12 +12,18 @@ class Aluguel:
         self.__veiculo = None
         self.__seguros = []
 
-        placa = input("Placa: ").strip().upper()
+        placa = None
 
         if self.__tipo_veiculo == "moto":
-            self.__veiculo = self._buscar(lista_motos, placa)
+            for moto in lista_motos:
+                print(moto)
+            placa = input("Placa: ").strip().upper()
+            self.__veiculo = self.buscar(lista_motos, placa)
         elif self.__tipo_veiculo == "carro":
-            self.__veiculo = self._buscar(lista_carros, placa)
+            for carro in lista_carros:
+                print(carro)
+            placa = input("Placa: ").strip().upper()
+            self.__veiculo = self.buscar(lista_carros, placa)
 
         if self.__veiculo is None:
             raise ValueError(f"Veículo com placa {placa} não encontrado.")
@@ -27,7 +33,7 @@ class Aluguel:
         self.__veiculo.set_alugado()
         self.gerar_valor()
 
-    def _buscar(self, lista, placa):
+    def buscar(self, lista, placa):
         for v in lista:
             if v.get_placa().strip().upper() == placa:
                 return v

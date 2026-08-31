@@ -45,7 +45,8 @@ while True:
     print("(5) Cancelar seguros")
     print("(6) Listar clientes")
     print("(7) Exibir veículos disponíveis")
-    print("(8) Sair")
+    print("(8) Adicionar Veículo")
+    print("(9) Sair")
 
 
     try:
@@ -84,15 +85,11 @@ while True:
                 novo_aluguel = None
 
                 if tipo_veiculo == "moto":
-                    for moto in motos:
-                        print(moto)
                     cliente.adicionar_aluguel(datetime.strptime(input("\nData de devolução (DD/MM/AAAA): ").strip(), "%d/%m/%Y").date(), tipo_veiculo, carros, motos)
                     limpar_tela()
                     print(f"Aluguel vinculado com sucesso ao cliente {cliente.get_nome()}!")
 
                 elif tipo_veiculo == "carro":
-                    for carro in carros:
-                        print(carro)
                     cliente.adicionar_aluguel(datetime.strptime(input("\nData de devolução (DD/MM/AAAA): ").strip(), "%d/%m/%Y").date(), tipo_veiculo, carros, motos)
                     limpar_tela()
                     print(f"Aluguel vinculado com sucesso ao cliente {cliente.get_nome()}!")
@@ -181,6 +178,21 @@ while True:
                 print("-" * 30) 
 
         case 8:
+            veiculo = input("Qual veículo deseja adicionar (Moto/Carro): ").strip().lower()
+            if veiculo == "moto":
+                motos.append(Moto(placa=input("Placa: "), modelo=input("Modelo:"), marca=input("Marca: "), categoria=input("Categoria: ")))
+                limpar_tela()
+                print("Veículo cadastrado com sucesso!")
+            elif veiculo == "carro":
+                carros.append(Carro(placa=input("Placa: "), modelo=input("Modelo:"), marca=input("Marca: "), quant_portas=input("Quantidade de portas: ")))
+                limpar_tela()
+                print("Veículo cadastrado com sucesso!")
+            else:
+                limpar_tela()
+                print("Veículo inválido! Escolha Moto ou Carro.")
+
+
+        case 9:
             print("Saindo do sistema...")
             break
 
